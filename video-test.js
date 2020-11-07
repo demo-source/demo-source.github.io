@@ -2,16 +2,18 @@ const videoConstraints = { video: { facingMode: 'environment' } }
 const text = document.querySelector('.text')
 
 try {
-    const _screen = 'screen: width=' + screen.width + ', height=' + screen.height + '\n'
+    const _screen = 'screen: width=' + screen.width + ', height=' + screen.height
 
     text.innerHTML = _screen
     navigator.mediaDevices.getUserMedia(videoConstraints)
         .then(stream => {
             const [videoTrack] = stream.getTracks()
 
-            capabilities = (videoTrack.getCapabilities || videoTrack.getSettings).call(videoTrack)
+            const capabilities = videoTrack.getCapabilities ? videoTrack.getCapabilities() : {}
+            const settings = videoTrack.getSettings ? videoTrack.getSettings() : {}
 
-            text.innerHTML += JSON.stringify(capabilities, null, '  ')
+            text.innerHTML += '\n\n' + JSON.stringify(capabilities, null, '  ')
+            text.innerHTML += '\n\n' + JSON.stringify(settings, null, '  ')
 
             videoTrack.stop()
         })

@@ -1,3 +1,6 @@
+---
+---
+{% capture build_number %}{{ site.github.build_revision }}{{ site.time | date: '%Y%m%d%H%M%S' }}{% endcapture %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +20,6 @@
     <code class="text"></code>
 </body>
 
-<script src="/video-test.js"></script>
+<script src="/video-test.js?v={{ build_number }}"></script>
 
 </html>

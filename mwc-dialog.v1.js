@@ -1,5 +1,6 @@
-import { oom } from 'https://cdn.jsdelivr.net/npm/notml@latest/core.js'
-import 'https://unpkg.com/@material/mwc-dialog?module'
+import { oom } from 'https://cdn.jsdelivr.net/npm/notml/core.js/+esm'
+import 'https://cdn.jsdelivr.net/npm/@material/mwc-dialog/+esm'
+
 
 oom(document.head, oom
     .link({ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap' }))

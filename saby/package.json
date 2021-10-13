@@ -6,6 +6,7 @@
     "@material/button": "latest",
     "@material/switch": "latest",
     "@material/dialog": "latest",
+    "@material/textfield": "latest",
     "@material/auto-init": "latest",
     "rollup": "latest",
     "@rollup/plugin-node-resolve": "latest",

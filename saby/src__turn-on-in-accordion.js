@@ -3,15 +3,21 @@ import autoInit from '@material/auto-init/index';
 
 import * as ripple from '@material/ripple/index';
 import * as switchControl from '@material/switch/index';
+import * as dialog from '@material/dialog/index';
+import * as textField from '@material/textfield/index';
+
 
 autoInit.register('MDCRipple', ripple.MDCRipple);
 autoInit.register('MDCSwitch', switchControl.MDCSwitch);
-
+autoInit.register('MDCDialog', dialog.MDCDialog);
+autoInit.register('MDCTextField', textField.MDCTextField);
 
 
 class TOIAContainer extends window.HTMLElement {
 
   switcher = null
+  configButton = null
+  configDialog = null
 
   get textfield_1() {
     return 'textfield_1'
@@ -107,7 +113,39 @@ class TOIAContainer extends window.HTMLElement {
         </label>
       </div>
       <div class="toia__config">
-        <span class="toia__config__icon icon-Settings"></span>
+        <span id="toia__config__button" class="toia__config__icon icon-Settings"></span>
+        <div id="toia__config__dialog" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
+          <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+              <h2 class="mdc-dialog__title">Здесь должен быть заголовок</h2>
+              <div class="mdc-dialog__content">
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                  <span class="mdc-text-field__ripple"></span>
+                  <span class="mdc-floating-label" id="my-label-id1">Hint text 1</span>
+                  <input class="mdc-text-field__input" type="text">
+                  <span class="mdc-line-ripple"></span>
+                </label>
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                  <span class="mdc-text-field__ripple"></span>
+                  <span class="mdc-floating-label" id="my-label-id2">Hint text 2</span>
+                  <input class="mdc-text-field__input" type="text">
+                  <span class="mdc-line-ripple"></span>
+                </label>
+              </div>
+              <div class="mdc-dialog__actions">
+                <button type="button" data-mdc-auto-init="MDCRipple" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">Cancel</span>
+                </button>
+                <button type="button" data-mdc-auto-init="MDCRipple" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">OK</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mdc-dialog__scrim"></div>
+        </div>
       </div>
     </div>
   `
@@ -120,6 +158,11 @@ class TOIAContainer extends window.HTMLElement {
 
     this.switcher = shadow.getElementById('toia__basic-switch')
     this.switcher.onclick = () => this.toggleSwitch()
+
+    this.configButton = shadow.getElementById('toia__config__button')
+    this.configButton.onclick = () => this.openConfigSwitch()
+
+    this.configDialog = shadow.getElementById('toia__config__dialog')
   }
 
   toggleSwitch() {
@@ -130,6 +173,10 @@ class TOIAContainer extends window.HTMLElement {
     } else {
       console.log(`turn off! text_1 = ${this.textfield_1}`)
     }
+  }
+
+  openConfigSwitch() {
+    this.configDialog.MDCDialog.open()
   }
 
 }

@@ -18,7 +18,7 @@ class TOIAContainer extends window.HTMLElement {
 
     shadow.innerHTML = `
     <head>
-      <link  href="https://cdn.jsdelivr.net/npm/material-components-web/dist/material-components-web.min.css" rel="stylesheet">
+      <link  href="https://demo-source.github.io/saby/turn-on-in-accordion.css" rel="stylesheet">
       <style>
         .toia__container {
           --mdc-theme-primary: #ff8552;

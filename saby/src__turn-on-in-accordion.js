@@ -81,9 +81,6 @@ class TOIAContainer extends window.HTMLElement {
           display: flex;
           margin-right: 6px;
         }
-        .toia__config .toia__config__dialog {
-          display: none;
-        }
         .toia__config__dialog__content {
           display: flex;
           flex-direction: column;
@@ -137,7 +134,7 @@ class TOIAContainer extends window.HTMLElement {
       </div>
       <div class="toia__config">
         <span id="toia__config__button" class="toia__config__icon icon-Settings"></span>
-        <div id="toia__config__dialog" class="toia__config__dialog mdc-dialog" data-mdc-auto-init="MDCDialog">
+        <div id="toia__config__dialog" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
           <div class="mdc-dialog__container">
             <div class="mdc-dialog__surface">
               <h2 class="mdc-dialog__title">Здесь должен быть заголовок</h2>

@@ -18,13 +18,25 @@ class TOIAContainer extends window.HTMLElement {
   switcher = null
   configButton = null
   configDialog = null
+  inputFld1 = null
+  inputFld2 = null
+  buttonCancel = null
+  buttonOk = null
 
   get textfield_1() {
-    return 'textfield_1'
+    return localStorage.getItem('toia__input-fld-id1') || ''
+  }
+
+  set textfield_1(value) {
+    localStorage.setItem('toia__input-fld-id1', value)
   }
 
   get textfield_2() {
-    return 'textfield_2'
+    return localStorage.getItem('toia__input-fld-id2') || ''
+  }
+
+  set textfield_2(value) {
+    localStorage.setItem('toia__input-fld-id2', value)
   }
 
   template = `
@@ -53,6 +65,7 @@ class TOIAContainer extends window.HTMLElement {
           justify-content: space-between;
           padding: 12px 6px;
           align-items: center;
+          z-index: 10000;
         }
         .toia__switcher {
           display: flex;
@@ -67,6 +80,16 @@ class TOIAContainer extends window.HTMLElement {
         .toia__config {
           display: flex;
           margin-right: 6px;
+        }
+        .toia__config .toia__config__dialog {
+          display: none;
+        }
+        .toia__config__dialog__content {
+          display: flex;
+          flex-direction: column;
+        }
+        .toia__config__dialog__field_frst {
+          margin-bottom: 20px;
         }
         .toia__config__icon {
           fill: #656c87;
@@ -114,30 +137,30 @@ class TOIAContainer extends window.HTMLElement {
       </div>
       <div class="toia__config">
         <span id="toia__config__button" class="toia__config__icon icon-Settings"></span>
-        <div id="toia__config__dialog" class="mdc-dialog" data-mdc-auto-init="MDCDialog">
+        <div id="toia__config__dialog" class="toia__config__dialog mdc-dialog" data-mdc-auto-init="MDCDialog">
           <div class="mdc-dialog__container">
             <div class="mdc-dialog__surface">
               <h2 class="mdc-dialog__title">Здесь должен быть заголовок</h2>
-              <div class="mdc-dialog__content">
-                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+              <div class="mdc-dialog__content toia__config__dialog__content">
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled toia__config__dialog__field_frst">
                   <span class="mdc-text-field__ripple"></span>
-                  <span class="mdc-floating-label" id="my-label-id1">Hint text 1</span>
-                  <input class="mdc-text-field__input" type="text">
+                  <span class="mdc-floating-label">Hint text 1</span>
+                  <input class="mdc-text-field__input" type="text" id="input-fld-id1" value="${this.textfield_1}">
                   <span class="mdc-line-ripple"></span>
                 </label>
                 <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
                   <span class="mdc-text-field__ripple"></span>
-                  <span class="mdc-floating-label" id="my-label-id2">Hint text 2</span>
-                  <input class="mdc-text-field__input" type="text">
+                  <span class="mdc-floating-label">Hint text 2</span>
+                  <input class="mdc-text-field__input" type="text" id="input-fld-id2" value="${this.textfield_2}">
                   <span class="mdc-line-ripple"></span>
                 </label>
               </div>
               <div class="mdc-dialog__actions">
-                <button type="button" data-mdc-auto-init="MDCRipple" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                <button id="button-cancel" type="button" data-mdc-auto-init="MDCRipple" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
                   <div class="mdc-button__ripple"></div>
                   <span class="mdc-button__label">Cancel</span>
                 </button>
-                <button type="button" data-mdc-auto-init="MDCRipple" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">
+                <button id="button-ok" type="button" data-mdc-auto-init="MDCRipple" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="accept">
                   <div class="mdc-button__ripple"></div>
                   <span class="mdc-button__label">OK</span>
                 </button>
@@ -153,6 +176,7 @@ class TOIAContainer extends window.HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' })
 
     this.setAttribute('data-vdomignore', 'true')
+    this.setAttribute('contenteditable', 'true')
     shadow.innerHTML = this.template
     autoInit(shadow)
 
@@ -163,6 +187,14 @@ class TOIAContainer extends window.HTMLElement {
     this.configButton.onclick = () => this.openConfigSwitch()
 
     this.configDialog = shadow.getElementById('toia__config__dialog')
+
+    this.inputFld1 = shadow.getElementById('input-fld-id1')
+    this.inputFld2 = shadow.getElementById('input-fld-id2')
+
+    this.buttonCancel = shadow.getElementById('button-cancel')
+    this.buttonCancel.onclick = () => this.cancelChanges()
+    this.buttonOk = shadow.getElementById('button-ok')
+    this.buttonOk.onclick = () => this.saveChanges()
   }
 
   toggleSwitch() {
@@ -177,6 +209,16 @@ class TOIAContainer extends window.HTMLElement {
 
   openConfigSwitch() {
     this.configDialog.MDCDialog.open()
+  }
+
+  cancelChanges() {
+    this.inputFld1.value = this.textfield_1
+    this.inputFld2.value = this.textfield_2
+  }
+
+  saveChanges() {
+    this.textfield_1 = this.inputFld1.value
+    this.textfield_2 = this.inputFld2.value
   }
 
 }

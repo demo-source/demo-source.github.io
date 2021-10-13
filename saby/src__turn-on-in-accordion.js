@@ -11,12 +11,17 @@ autoInit.register('MDCSwitch', switchControl.MDCSwitch);
 
 class TOIAContainer extends window.HTMLElement {
 
-  connectedCallback() {
-    const shadow = this.attachShadow({ mode: 'open' })
+  switcher = null
 
-    this.setAttribute('data-vdomignore', 'true')
+  get textfield_1() {
+    return 'textfield_1'
+  }
 
-    shadow.innerHTML = `
+  get textfield_2() {
+    return 'textfield_2'
+  }
+
+  template = `
     <head>
       <link  href="https://demo-source.github.io/saby/turn-on-in-accordion.css" rel="stylesheet">
       <style>
@@ -105,17 +110,25 @@ class TOIAContainer extends window.HTMLElement {
         <span class="toia__config__icon icon-Settings"></span>
       </div>
     </div>
-    `
+  `
+  connectedCallback() {
+    const shadow = this.attachShadow({ mode: 'open' })
+
+    this.setAttribute('data-vdomignore', 'true')
+    shadow.innerHTML = this.template
     autoInit(shadow)
 
-    shadow.getElementById('toia__basic-switch').onclick = () => {
-      const { selected } = shadow.getElementById('toia__basic-switch').MDCSwitch
+    this.switcher = shadow.getElementById('toia__basic-switch')
+    this.switcher.onclick = () => this.toggleSwitch()
+  }
 
-      if (selected) {
-        console.log('turn on! text_1 = <значение из localstorage>')
-      } else {
-        console.log('turn off! text_1 = <значение из localstorage>')
-      }
+  toggleSwitch() {
+    const { selected } = this.switcher.MDCSwitch
+
+    if (selected) {
+      console.log(`turn on! text_1 = ${this.textfield_1}`)
+    } else {
+      console.log(`turn off! text_1 = ${this.textfield_1}`)
     }
   }
 

@@ -1,4 +1,4 @@
-import { autoInit } from 'https://cdn.jsdelivr.net/npm/material-components-web/dist/material-components-web.min.js'
+import mdc from 'https://cdn.jsdelivr.net/npm/material-components-web/dist/material-components-web.min.js'
 
 const accordionContainer = document.querySelector('.NavigationPanels-Accordion__container')
 
@@ -41,7 +41,7 @@ class TOIAContainer extends window.HTMLElement {
       </div>
     </div>
     `
-    autoInit()
+    mdc.autoInit()
   }
 
 }

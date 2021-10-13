@@ -1,4 +1,4 @@
-import mdc from 'https://cdn.jsdelivr.net/npm/material-components-web/dist/material-components-web.min.js'
+import * as mdc from 'https://cdn.jsdelivr.net/npm/material-components-web/dist/material-components-web.min.js'
 
 const accordionContainer = document.querySelector('.NavigationPanels-Accordion__container')
 

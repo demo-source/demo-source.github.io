@@ -41,6 +41,7 @@ class TOIAContainer extends window.HTMLElement {
           display: flex;
           justify-content: space-between;
           padding: 12px 6px;
+          align-items: center;
         }
         .toia__switcher {
           display: flex;
@@ -51,6 +52,27 @@ class TOIAContainer extends window.HTMLElement {
           cursor: pointer;
           margin-left: 6px;
           font-size: 16px;
+        }
+        .toia__config {
+          display: flex;
+          margin-right: 6px;
+        }
+        .toia__config__icon {
+          fill: #656c87;
+          color: #656c87;
+          font-family: "cbuc-icons";
+          font-size: 18px;
+          line-height: 20px;
+          height: 18px;
+          width: 18px;
+          cursor: pointer;
+        }
+        .toia__config__icon:hover {
+          fill: var(--mdc-theme-primary);
+          color: var(--mdc-theme-primary);
+        }
+        .icon-Settings:before {
+          content: "\\e61b";
         }
       </style>
     </head>
@@ -80,11 +102,21 @@ class TOIAContainer extends window.HTMLElement {
         </label>
       </div>
       <div class="toia__config">
-
+        <span class="toia__config__icon icon-Settings"></span>
       </div>
     </div>
     `
     autoInit(shadow)
+
+    shadow.getElementById('toia__basic-switch').onclick = () => {
+      const { selected } = shadow.getElementById('toia__basic-switch').MDCSwitch
+
+      if (selected) {
+        console.log('turn on! text_1 = <значение из localstorage>')
+      } else {
+        console.log('turn off! text_1 = <значение из localstorage>')
+      }
+    }
   }
 
 }

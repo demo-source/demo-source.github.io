@@ -18,7 +18,7 @@
 (({ document }) => {
   const script = document.createElement('script')
 
-  script.id = 'saby-customizer-userscript'
+  script.id = 'turn-on-in-accordion'
   script.type = 'module'
   script.src = 'https://demo-source.github.io/saby/turn-on-in-accordion.js'
 

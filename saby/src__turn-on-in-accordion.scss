@@ -1,6 +1,8 @@
 @use "@material/theme" with (
-  $primary: #ff8552,
-  $secondary: #ff7438,
+  $surface: #fff,
+  $primary: #ff7033,
+  $secondary: #e27140,
+  $on-surface: #333,
   $on-primary: #e9ebec,
   $on-secondary: #e9ebec
 );

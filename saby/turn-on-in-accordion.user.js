@@ -22,7 +22,7 @@
   script.type = 'module'
   script.src = 'https://demo-source.github.io/saby/turn-on-in-accordion.js'
 
-  document.documentElement.appendChild(script)
+  document.documentElement.append(script)
 })(
   // @ts-ignore
   unsafeWindow

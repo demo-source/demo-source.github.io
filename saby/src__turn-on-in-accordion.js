@@ -90,6 +90,7 @@ class TOIASwitchContainer extends TOIAStorage {
   switcher = null
   configButton = null
   configDialog = null
+  dialog = null
 
   styleTemplate = `
     .toia__container {
@@ -214,10 +215,12 @@ class TOIASwitchContainer extends TOIAStorage {
   }
 
   openConfigDialog() {
-    const dialog = document.createElement('toia-dialog-container')
+    if (!this.dialog) {
+      this.dialog = document.createElement('toia-dialog-container')
+      document.documentElement.append(this.dialog)
+    }
 
-    document.documentElement.append(dialog)
-    dialog.openConfigDialog()
+    this.dialog.openConfigDialog()
   }
 
 }
@@ -287,7 +290,6 @@ class TOIADialogContainer extends TOIAStorage {
     super.connectedCallback()
 
     this.configDialog = this.shadow.getElementById('toia__config__dialog')
-    this.configDialog.MDCDialog.listen('MDCDialog:closed', () => this.onClose())
 
     this.inputFld1 = this.shadow.getElementById('input-fld-id1')
     this.inputFld2 = this.shadow.getElementById('input-fld-id2')
@@ -300,10 +302,6 @@ class TOIADialogContainer extends TOIAStorage {
 
   openConfigDialog() {
     this.configDialog.MDCDialog.open()
-  }
-
-  onClose() {
-    this.remove()
   }
 
   cancelChanges() {

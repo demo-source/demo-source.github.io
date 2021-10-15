@@ -1,0 +1,21 @@
+{
+  "license": "Unlicense",
+  "dependencies": {
+    "@material/theme": "latest",
+    "@material/ripple": "latest",
+    "@material/button": "latest",
+    "@material/switch": "latest",
+    "@material/dialog": "latest",
+    "@material/textfield": "latest",
+    "@material/auto-init": "latest",
+    "rollup": "latest",
+    "@rollup/plugin-node-resolve": "latest",
+    "rollup-plugin-terser": "latest",
+    "rollup-plugin-cleanup": "latest",
+    "rollup-plugin-postcss": "latest",
+    "sass": "latest"
+  },
+  "scripts": {
+    "build": "npx rollup --config rollup.config.js"
+  }
+}
